@@ -20,7 +20,6 @@ export default function MoviesPage() {
   };
 
   function onSubmit(searchQuery) {
-    console.log("searchQuery onSubmit func", searchQuery);
     navigate({ ...location, search: `query=${searchQuery}` });
     try {
       moviesAPI.fetchMoviesByQuery(searchQuery).then(setMovies);

@@ -1,29 +1,34 @@
-import { Route, Routes, useParams, NavLink } from "react-router-dom";
-import * as moviesAPI from "../../services/movies-api";
-import { useState, useEffect } from "react";
+import {
+  Route,
+  Routes,
+  useParams,
+  NavLink,
+  useNavigate,
+} from "react-router-dom";
+import { useState, useEffect, lazy, Suspense } from "react";
 import styles from "./MovieCard.module.css";
-import Cast from "../Cast/Cast";
+import * as moviesAPI from "../../services/movies-api";
+const Cast = lazy(() => import("../Cast/Cast.js"));
+const Reviews = lazy(() => import("../Reviews/Reviews.js"));
 
 export default function MovieCard() {
   const [movie, setMovie] = useState(null);
-
   const { movieId } = useParams();
+  const navigate = useNavigate();
 
   useEffect(() => {
     const getMovie = async () => {
       const currentMovie = await moviesAPI.fetchMovieById(movieId);
-
       setMovie(currentMovie);
     };
-
     getMovie();
   }, [movieId]);
 
-  console.log(movie);
   return (
     <div>
       {movie && (
         <div>
+          <button onClick={() => navigate(-1)}>Go Back</button>
           <div className={styles.shortInfo}>
             <div>
               <img
@@ -46,18 +51,18 @@ export default function MovieCard() {
             <h3>Additional Information</h3>
             <ul>
               <li>
-                <NavLink to={{ pathname: ":movieId/cast" }}>Cast</NavLink>
+                <NavLink to={{ pathname: "cast" }}>Cast</NavLink>
               </li>
               <li>
-                <NavLink to="">Reviews</NavLink>
+                <NavLink to={{ pathname: "reviews" }}>Reviews</NavLink>
               </li>
             </ul>
-            <Routes>
-              <Route
-                path=":movieId/cast"
-                element={<Cast movieId={movieId} />}
-              />
-            </Routes>
+            <Suspense fallback={<h1>Loading.....................</h1>}>
+              <Routes>
+                <Route path="cast" element={<Cast movieId={movieId} />} />
+                <Route path="reviews" element={<Reviews movieId={movieId} />} />
+              </Routes>
+            </Suspense>
           </div>
         </div>
       )}

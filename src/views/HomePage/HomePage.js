@@ -13,12 +13,10 @@ export default function HomePage() {
   } catch (error) {
     console.log(error);
   }
-  console.log(movies);
 
   return (
     <div>
       <h1>Trending today</h1>
-
       {movies &&
         movies.results.map((res) => (
           <nav className={styles.nav} key={res.id}>

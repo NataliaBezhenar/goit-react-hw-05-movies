@@ -12,8 +12,6 @@ export default function Cast({ movieId }) {
     getCast();
   }, [movieId]);
 
-  console.log(cast);
-
   return (
     <div>
       <ul>
