@@ -1,10 +1,12 @@
-import { NavLink, useParams } from "react-router-dom";
+import { Route, Routes, useParams, NavLink } from "react-router-dom";
 import * as moviesAPI from "../../services/movies-api";
 import { useState, useEffect } from "react";
 import styles from "./MovieCard.module.css";
+import Cast from "../Cast/Cast";
 
 export default function MovieCard() {
   const [movie, setMovie] = useState(null);
+
   const { movieId } = useParams();
 
   useEffect(() => {
@@ -17,7 +19,6 @@ export default function MovieCard() {
     getMovie();
   }, [movieId]);
 
-  // moviesAPI.fetchMovieById(movieId).then(console.log);
   console.log(movie);
   return (
     <div>
@@ -45,15 +46,22 @@ export default function MovieCard() {
             <h3>Additional Information</h3>
             <ul>
               <li>
-                <NavLink to="">Cast</NavLink>
+                <NavLink to={{ pathname: ":movieId/cast" }}>Cast</NavLink>
               </li>
               <li>
                 <NavLink to="">Reviews</NavLink>
               </li>
             </ul>
+            <Routes>
+              <Route
+                path=":movieId/cast"
+                element={<Cast movieId={movieId} />}
+              />
+            </Routes>
           </div>
         </div>
       )}
+      <hr />
     </div>
   );
 }

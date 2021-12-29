@@ -27,3 +27,10 @@ export function fetchMovieById(movie_id) {
     `https://api.themoviedb.org/3/movie/${movie_id}?api_key=${KEY}&language=en-US`
   );
 }
+
+export function fetchCastById(movie_id) {
+  console.log(fetchCastById);
+  return fetchMovies(
+    `https://api.themoviedb.org/3/movie/${movie_id}/credits?api_key=${KEY}&language=en-US`
+  );
+}
