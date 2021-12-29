@@ -1,0 +1,8 @@
+.shortInfo {
+  display: flex;
+}
+
+.shortInfoChild {
+  width: 800px;
+  padding-left: 50px;
+}

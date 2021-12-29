@@ -2,11 +2,11 @@ import { useState } from "react";
 import { useLocation, useNavigate, Link } from "react-router-dom";
 
 import * as moviesAPI from "../../services/movies-api";
-import PropTypes from "prop-types";
 
 export default function MoviesPage() {
   const [searchQuery, setSearchQuery] = useState("");
   const [movies, setMovies] = useState(null);
+
   const navigate = useNavigate();
   const location = useLocation();
 
@@ -28,8 +28,6 @@ export default function MoviesPage() {
       console.log(error);
     }
   }
-  console.log(movies);
-
   const handleQueryChange = (e) => {
     setSearchQuery(e.currentTarget.value.toLowerCase());
     if (e.currentTarget.value === "") {
@@ -61,7 +59,3 @@ export default function MoviesPage() {
     </form>
   );
 }
-
-MoviesPage.propTypes = {
-  onSubmit: PropTypes.func,
-};
