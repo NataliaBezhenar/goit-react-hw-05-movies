@@ -1,6 +1,7 @@
 import { useState, useEffect } from "react";
 import * as moviesAPI from "../../services/movies-api";
 import styles from "./Cast.module.css";
+import PropTypes from "prop-types";
 
 export default function Cast({ movieId }) {
   const [cast, setCast] = useState(null);
@@ -38,3 +39,7 @@ export default function Cast({ movieId }) {
     </div>
   );
 }
+
+Cast.propTypes = {
+  movieId: PropTypes.string.isRequired,
+};

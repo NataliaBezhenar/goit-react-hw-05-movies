@@ -1,4 +1,5 @@
 import { useState, useEffect } from "react";
+import PropTypes from "prop-types";
 import * as moviesAPI from "../../services/movies-api";
 
 export default function Reviews({ movieId }) {
@@ -29,3 +30,7 @@ export default function Reviews({ movieId }) {
     </div>
   );
 }
+
+Reviews.propTypes = {
+  movieId: PropTypes.string.isRequired,
+};
