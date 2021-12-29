@@ -13,3 +13,10 @@ export function fetchTrendingMovies() {
     `https://api.themoviedb.org/3/trending/all/day?api_key=${KEY}`
   );
 }
+
+export function fetchMoviesByQuery(query) {
+  console.log("fetch Movies By Query; QUERY ---> ", query);
+  return fetchMovies(
+    `https://api.themoviedb.org/3/search/movie?api_key=${KEY}&language=en-US&page=1&include_adult=false&query=${query}`
+  );
+}

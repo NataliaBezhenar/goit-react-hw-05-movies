@@ -3,6 +3,7 @@ import AppBar from "./components/AppBar/AppBar";
 
 import { Routes, Route } from "react-router-dom";
 import HomePage from "./views/HomePage/HomePage";
+import MoviesPage from "./views/MoviesPage/MoviesPage";
 
 function App() {
   return (
@@ -10,7 +11,7 @@ function App() {
       <AppBar />
       <Routes>
         <Route path="/" element={<HomePage />} />
-        <Route path="/movies" element={<h1>This is Movies Page</h1>} />
+        <Route path="/movies" element={<MoviesPage />} />
       </Routes>
     </Container>
   );

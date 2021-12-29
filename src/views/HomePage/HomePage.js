@@ -22,7 +22,7 @@ export default function HomePage() {
       {movies &&
         movies.results.map((res) => (
           <nav className={styles.nav} key={res.id}>
-            <Link to={`${res.id}`}>{res.title}</Link>
+            <Link to={`/movies/${res.id}`}>{res.title}</Link>
           </nav>
         ))}
       <hr />
