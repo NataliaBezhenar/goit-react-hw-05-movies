@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { useLocation, useNavigate, Link } from "react-router-dom";
-import { useEffect } from "react/cjs/react.development";
+import React, { useEffect } from "react";
 
 import * as moviesAPI from "../../services/movies-api";
 
