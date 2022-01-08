@@ -14,8 +14,6 @@ export default function MoviesPage() {
     new URLSearchParams(location.search).get("query")
   );
 
-  const query = searchQuery || urlQuery;
-  console.log(query);
   const handleSubmit = (e) => {
     e.preventDefault();
     if (searchQuery.trim() === "") {
@@ -27,7 +25,6 @@ export default function MoviesPage() {
 
   useEffect(() => {
     if (!urlQuery) return;
-
     moviesAPI.fetchMoviesByQuery(urlQuery).then(setMovies);
   }, [urlQuery]);
 

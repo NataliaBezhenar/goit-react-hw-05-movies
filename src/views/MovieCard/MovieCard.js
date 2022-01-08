@@ -28,7 +28,6 @@ export default function MovieCard() {
   }, [movieId]);
 
   const goBack = () => {
-    console.log("back btn click");
     if (location.pathname === `/movies/${movieId}`) {
       navigate(-1);
     }
