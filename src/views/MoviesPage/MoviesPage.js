@@ -44,7 +44,7 @@ export default function MoviesPage() {
         value={searchQuery}
         onChange={handleQueryChange}
       />
-      <button>Search</button>
+      <button type="submit">Search</button>
       {movies &&
         (movies.results.length === 0 ? (
           <h3>Nothing found on your query(((</h3>

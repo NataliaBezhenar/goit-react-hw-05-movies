@@ -4,6 +4,7 @@ import {
   useParams,
   NavLink,
   useNavigate,
+  useLocation,
 } from "react-router-dom";
 import { useState, useEffect, lazy, Suspense } from "react";
 import styles from "./MovieCard.module.css";
@@ -16,6 +17,7 @@ export default function MovieCard() {
   const [movie, setMovie] = useState(null);
   const { movieId } = useParams();
   const navigate = useNavigate();
+  const location = useLocation();
 
   useEffect(() => {
     const getMovie = async () => {
@@ -25,11 +27,25 @@ export default function MovieCard() {
     getMovie();
   }, [movieId]);
 
+  const goBack = () => {
+    if (location.pathname === `/movies/${movieId}`) {
+      navigate(-1);
+    }
+    if (
+      location.pathname === `/movies/${movieId}/actors` ||
+      location.pathname === `/movies/${movieId}/reviews`
+    ) {
+      navigate(-2);
+    }
+  };
+
   return (
     <div>
       {movie && (
         <div>
-          <button onClick={() => navigate(-1)}>Go Back</button>
+          <button type="button" onClick={goBack}>
+            Go Back
+          </button>
           <div className={styles.shortInfo}>
             <div>
               <img
