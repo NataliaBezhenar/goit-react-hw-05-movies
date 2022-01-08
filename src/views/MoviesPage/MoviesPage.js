@@ -1,5 +1,6 @@
 import { useState } from "react";
 import { useLocation, useNavigate, Link } from "react-router-dom";
+import { useEffect } from "react/cjs/react.development";
 
 import * as moviesAPI from "../../services/movies-api";
 
@@ -9,7 +10,12 @@ export default function MoviesPage() {
 
   const navigate = useNavigate();
   const location = useLocation();
+  const [urlQuery] = useState(() =>
+    new URLSearchParams(location.search).get("query")
+  );
 
+  const query = searchQuery || urlQuery;
+  console.log(query);
   const handleSubmit = (e) => {
     e.preventDefault();
     if (searchQuery.trim() === "") {
@@ -19,6 +25,12 @@ export default function MoviesPage() {
     onSubmit(searchQuery);
   };
 
+  useEffect(() => {
+    if (!urlQuery) return;
+
+    moviesAPI.fetchMoviesByQuery(urlQuery).then(setMovies);
+  }, [urlQuery]);
+
   function onSubmit(searchQuery) {
     navigate({ ...location, search: `query=${searchQuery}` });
     try {
@@ -26,7 +38,9 @@ export default function MoviesPage() {
     } catch (error) {
       console.log(error);
     }
+    setSearchQuery(searchQuery);
   }
+
   const handleQueryChange = (e) => {
     setSearchQuery(e.currentTarget.value.toLowerCase());
     if (e.currentTarget.value === "") {

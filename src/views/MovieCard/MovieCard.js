@@ -28,11 +28,12 @@ export default function MovieCard() {
   }, [movieId]);
 
   const goBack = () => {
+    console.log("back btn click");
     if (location.pathname === `/movies/${movieId}`) {
       navigate(-1);
     }
     if (
-      location.pathname === `/movies/${movieId}/actors` ||
+      location.pathname === `/movies/${movieId}/cast` ||
       location.pathname === `/movies/${movieId}/reviews`
     ) {
       navigate(-2);
